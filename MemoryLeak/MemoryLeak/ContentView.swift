@@ -17,8 +17,8 @@ class RastreadorDeTorcida {
     var aoAtualizarCliques: ((Int) -> Void)?
     
     func registrarClique() {
-        totalCliques += 1
-        aoAtualizarCliques?(totalCliques)
+        self.totalCliques += 1
+        self.aoAtualizarCliques?(totalCliques)
     }
     
     deinit {
@@ -37,20 +37,19 @@ class DetalheTimeViewModel: ObservableObject {
     
     init(nomeTime: String) {
         self.nomeTime = nomeTime
-        print("ViewModel do \(nomeTime) entrou na memória (Init)")
+        print("ViewModel do \(nomeTime) alocado na memória (Init)")
         
-        rastreador.aoAtualizarCliques = { novoValor in
+        self.rastreador.aoAtualizarCliques = { novoValor in
             self.cliques = novoValor
         }
-
     }
     
     func torcer() {
-        rastreador.registrarClique()
+        self.rastreador.registrarClique()
     }
     
     deinit {
-        print("ViewModel do \(nomeTime) saiu da memória (Deinit)")
+        print("ViewModel do \(nomeTime) desalocado da memória (Deinit)")
     }
 }
 
